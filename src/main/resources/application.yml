@@ -1,0 +1,9 @@
+spring:
+  datasource:
+      url: jdbc:mysql://localhost:3306/pink?serverTimezone=UTC
+      username: root
+      password: 123
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.bp.demo01.bean

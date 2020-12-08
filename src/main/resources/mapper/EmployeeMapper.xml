@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bp.demo01.dao.EmployeeMapper">
+
+  <resultMap id="employeeMap" type="com.bp.demo01.bean.Employee">
+    <id property="id" column="emp_id"/>
+  	<result property="name" column="emp_name"/>
+  	<result property="age" column="emp_age"/>
+  	<result property="team" column="emp_team"/>
+  	<association property="department" javaType="com.bp.demo01.bean.Department">
+  	    <id property="id" column="deptment_id"/>
+  		<result property="name" column="deptment_name"/>
+  	</association>
+  </resultMap>
+
+  <select id="selectId" resultMap="employeeMap">
+  SELECT 
+    e.emp_id,
+    e.emp_name,
+    e.emp_team,
+    e.emp_age,
+    d.deptment_id,
+    d.deptment_name
+  FROM
+    employee as e
+  INNER JOIN
+    department as d
+  ON
+    e.deptment_id=d.deptment_id
+  WHERE
+    e.deptment_id=#{id}
+  </select>
+
+  <select id="selectLittle" resultMap="employeeMap">
+  SELECT
+    e.emp_id,
+    e.emp_name,
+    e.emp_team,
+    e.emp_age,
+    d.deptment_id,
+    d.deptment_name
+  FROM
+    employee as e
+  INNER JOIN
+    department as d
+  ON
+    e.deptment_id=d.deptment_id
+  WHERE
+    e.emp_id=#{id}
+  </select>
+  <select id="selectAll" resultMap="employeeMap">
+  Select
+    emp_id,
+    emp_name,
+    emp_team,
+    emp_age
+  from
+  employee
+  </select>
+  <insert id="saveEmployee" >
+  INSERT into
+  employee (emp_id,emp_name,emp_age,emp_team,deptment_id)
+  values (#{Id},#{Name},#{Age},#{Team},#{deptment_id})
+  </insert>
+  <delete id="deleteId">
+    delete
+    from
+    employee
+    where
+    emp_id=#{id}
+  </delete>
+  <update id="updateAll">
+  update
+  employee
+  set
+  emp_name=#{name},emp_age=#{age},emp_team=#{team},deptment_id=#{deptment_id}
+  where
+  emp_id=#{id}
+  </update>
+</mapper>

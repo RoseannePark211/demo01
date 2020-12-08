@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bp.demo01.dao.DepartmentMapper">
+ <resultMap id="departmentMap" type="com.bp.demo01.bean.Department">
+   <id column="deptment_id" property="id"/>
+   <result column="deptment_name" property="name"/>
+   <collection property="employees" ofType="com.bp.demo01.bean.Employee">
+     <id column="emp_id" property="id"/>
+     <result column="emp_name" property="name"/>
+     <result column="emp_age" property="age"/>
+     <result column="emp_team" property="team"/>
+   </collection>
+  </resultMap>
+  <select id="getById" resultMap="departmentMap">
+   SELECT 
+    d.deptment_id,
+    d.deptment_name
+  FROM
+    department as d
+  INNER JOIN
+    employee as e
+  ON
+    d.deptment_id=e.deptment_id
+  WHERE
+    d.deptment_id=#{id}
+  </select>
+
+  <select id="getAll" resultMap="departmentMap">
+   SELECT
+    *
+  FROM
+    department
+  </select>
+</mapper>

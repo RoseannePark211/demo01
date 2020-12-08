@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+
+<form action="employee">
+    <select name="id">
+        <option display="none"/>
+        <option th:each="dept: ${departments}"
+                th:text="${dept.name}"
+                th:value="${dept.id}"
+                th:selected="${dept.id}==${deptment_id}?true:false"></option>
+    </select>
+    <input type="submit" value="查询">
+    <a href="addInf1">添加</a>
+</form>
+
+<table border="1" cellpadding="0" cellspacing="0" width="500">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>队伍</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="emp: ${employees}" name="id">
+        <td th:text="${emp.id}" th:value="${emp.id}"></td>
+        <td th:text="${emp.name}"></td>
+        <td th:text="${emp.age}"></td>
+        <td th:text="${emp.team}"></td>
+        <td align="center">
+            <a th:href="@{updateAll1(id=${emp.id})}"><input type="submit" value="修改"></a>
+            <a th:href="@{del(id=${emp.id})}"><input type="submit" value="删除"></a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

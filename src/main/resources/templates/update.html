@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+</head>
+<form action="/updateAll" >
+    编号:  <span th:text=" ${employees.id}"/><input type="hidden" name="id" id="Id"th:value="${employees.id}"></br>
+    姓名:  <input type="text" name="name" id="Name"th:value="${employees.name}"></br>
+    年龄:  <input type="number" name="age" id="Age"th:value="${employees.age}"></br>
+    队伍:  <input type="text" name="team" id="Team"th:value="${employees.team}"></br>
+    部门：
+    <select name="deptment_id">
+        <option th:each="dept : ${departments}"
+                th:value="${dept.id}"
+                th:text="${dept.name}"
+                th:selected="${dept.id == employees.department.id}">xxxxx</option>
+    </select><br/>
+    <input type="submit" value="修改">
+</form>
+</body>
+</html>
